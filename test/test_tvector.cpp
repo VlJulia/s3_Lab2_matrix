@@ -26,12 +26,17 @@ TEST(TDynamicVector, can_create_copied_vector)
 
 TEST(TDynamicVector, copied_vector_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v(4);
+	TDynamicVector<int> v2(v);
+	EXPECT_EQ(v,v2);
 }
 
 TEST(TDynamicVector, copied_vector_has_its_own_memory)
 {
-  ADD_FAILURE();
+		TDynamicVector<int> v(4);
+		TDynamicVector<int> v2(v);
+		v2[0] = 1;
+		EXPECT_NE(v, v2);
 }
 
 TEST(TDynamicVector, can_get_size)
@@ -51,91 +56,162 @@ TEST(TDynamicVector, can_get_size)
 
 TEST(TDynamicVector, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v(5);
+	ASSERT_ANY_THROW(v[-4]);
+
 }
 
 TEST(TDynamicVector, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v(5);
+	ASSERT_ANY_THROW(v[8]);
 }
 
 TEST(TDynamicVector, can_assign_vector_to_itself)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v(5);
+	EXPECT_EQ(true, v==v);
 }
 
 TEST(TDynamicVector, can_assign_vectors_of_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(5);
+	TDynamicVector<int> v2(5);
+	v1[1] = 3;
+	EXPECT_EQ(false, v1 == v2);
 }
 
 TEST(TDynamicVector, assign_operator_change_vector_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(5);
+	TDynamicVector<int> v2(6);
+	v1 = v2;
+	v1[5] = 3;
+	EXPECT_EQ(3, v1[5]);
+  
 }
 
 TEST(TDynamicVector, can_assign_vectors_of_different_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(5);
+	TDynamicVector<int> v2(6);
+	EXPECT_EQ(false, v1 == v2);
 }
 
 TEST(TDynamicVector, compare_equal_vectors_return_true)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(5);
+	TDynamicVector<int> v2(v1);
+	EXPECT_EQ(true, v1 == v2);
 }
 
 TEST(TDynamicVector, compare_vector_with_itself_return_true)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v(5);
+	EXPECT_EQ(true, v == v);
 }
 
 TEST(TDynamicVector, vectors_with_different_size_are_not_equal)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(5);
+	TDynamicVector<int> v2(6);
+	EXPECT_EQ(false, v1 == v2);
 }
 
 TEST(TDynamicVector, can_add_scalar_to_vector)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 0;
+	v1[1] = 0;
+	v1 = v1 + 2;
+
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TDynamicVector, can_subtract_scalar_from_vector)
 {
-  ADD_FAILURE();
+  TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 0;
+	v1[1] = 0;
+	v2 = v2 - 2;
+
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TDynamicVector, can_multiply_scalar_by_vector)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 1;
+	v1[1] = 1;
+	v1 = v1*2;
+
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TDynamicVector, can_add_vectors_with_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 1;
+	v1[1] = 1;
+
+	EXPECT_EQ(v1+v1, v2);
 }
 
 TEST(TDynamicVector, cant_add_vectors_with_not_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(4);
+	ASSERT_ANY_THROW(v1+v2);
 }
 
 TEST(TDynamicVector, can_subtract_vectors_with_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 0;
+	v1[1] = 0;
+
+	EXPECT_EQ(v1, v2-v2);
 }
 
 TEST(TDynamicVector, cant_subtract_vectors_with_not_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(3);
+
+	ASSERT_ANY_THROW(v2-v1);
 }
 
 TEST(TDynamicVector, can_multiply_vectors_with_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(2);
+	v2[0] = 2;
+	v2[1] = 2;
+	v1[0] = 1;
+	v1[1] = 1;
+	EXPECT_EQ(4, v1*v2);
 }
 
 TEST(TDynamicVector, cant_multiply_vectors_with_not_equal_size)
 {
-  ADD_FAILURE();
+	TDynamicVector<int> v1(2);
+	TDynamicVector<int> v2(3);
+
+	ASSERT_ANY_THROW(v1 * v2);
 }
 

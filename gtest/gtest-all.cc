@@ -2922,7 +2922,7 @@ std::string CodePointToUtf8(UInt32 code_point) {
     return "(Invalid Unicode 0x" + String::FormatHexInt(code_point) + ")";
   }
 
-  char str[5];  // Big enough for the largest valid code point.
+  char str[5]{};  // Big enough for the largest valid code point.
   if (code_point <= kMaxCodePoint1) {
     str[1] = '\0';
     str[0] = static_cast<char>(code_point);                          // 0xxxxxxx
